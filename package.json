@@ -1,0 +1,33 @@
+{
+  "name": "nst-serialport-ble",
+  "version": "1.0.0",
+  "description": "Serial port websockets client, sends on BLE",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "nst-serialport-ble": "withNode.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nstrumenta/nst-serialport-ble.git"
+  },
+  "keywords": [
+    "serial",
+    "serialport",
+    "ble"
+  ],
+  "author": "Tyler Bryant",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/nstrumenta/nst-serialport/issues"
+  },
+  "homepage": "https://github.com/nstrumenta/nst-serialport#readme",
+  "dependencies": {
+    "bleno": "^0.5.0",
+    "minimist": "^1.2.0",
+    "serialport": "^9.0.4"
+  }
+}
