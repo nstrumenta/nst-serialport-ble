@@ -1,6 +1,6 @@
 var util = require("util");
 
-var bleno = require("bleno-mac");
+var bleno = require("rpi-fix-bleno");
 
 var BlenoCharacteristic = bleno.Characteristic;
 

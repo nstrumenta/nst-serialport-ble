@@ -26,10 +26,8 @@
   },
   "homepage": "https://github.com/nstrumenta/nst-serialport#readme",
   "dependencies": {
-    "bleno": "github:notjosh/bleno#inject-bindings",
-    "bleno-mac": "github:notjosh/bleno-mac",
-    "xpc-connection": "github:sandeepmistry/node-xpc-connection#pull/26/head",
     "minimist": "^1.2.0",
+    "rpi-fix-bleno": "^0.5.2",
     "serialport": "^9.0.4"
   }
 }

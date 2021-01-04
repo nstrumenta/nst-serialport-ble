@@ -119,7 +119,7 @@ SerialPort.list().then((ports) => {
                       //filter vehicle speed, steering angle, and wheel speeds
                       //send on
                       if ([0x309, 0x156, 0x158, 0x1d0].includes(id)) {
-                        if (characteristic?._updateValueCallback) {
+                        if (characteristic._updateValueCallback) {
                           characteristic._updateValueCallback(dataArray);
                         }
                       }
@@ -189,27 +189,27 @@ var mockCanlogger = require("./mock-canlogger.json");
 
 let i = 0;
 setInterval(() => {
-  console.log("testing BLE");
+  // console.log("testing BLE");
   canloggerMessage = mockCanlogger[i++];
   if (i == mockCanlogger.length) {
     i = 0;
   }
-  console.log(canloggerMessage);
-  if (characteristic?._updateValueCallback && canloggerMessage?.data) {
+  // console.log(canloggerMessage);
+  if (characteristic._updateValueCallback && canloggerMessage.data) {
     dataArray = new Uint8Array(canloggerMessage.data.data);
     var dataView = new DataView(dataArray.buffer);
     var id = dataView.getUint32(8);
     var dataLength = dataView.getUint8(12);
-    if ([0x309, 0x156, 0x158, 0x1d0].includes(id)) {
-      if (characteristic?._updateValueCallback) {
+    //if ([0x309, 0x156, 0x158, 0x1d0].includes(id)) {
+      if (characteristic._updateValueCallback) {
         characteristic._updateValueCallback(dataArray);
       }
-    }
+    //}
   }
-}, 100);
+}, 1000);
 
 //bleno
-var bleno = require("bleno-mac");
+var bleno = require("rpi-fix-bleno");
 
 var BlenoPrimaryService = bleno.PrimaryService;
 
