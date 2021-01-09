@@ -111,7 +111,7 @@ const connectToPeripherals = () => {
                         //filter vehicle speed, steering angle, and wheel speeds
                         //send on
                         if ([0x309, 0x156, 0x158, 0x1d0].includes(id)) {
-                          if (characteristic?._updateValueCallback) {
+                          if (characteristic._updateValueCallback) {
                             characteristic._updateValueCallback(dataArray);
                           }
                         }
