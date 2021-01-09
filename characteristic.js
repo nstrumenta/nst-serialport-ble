@@ -11,6 +11,10 @@ var Characteristic = function () {
     value: null,
   });
 
+  //callbacks used in index
+  this.onSubscribe = null;
+  this.onUnsubscribe = null;
+
   this._value = new Buffer.alloc(0);
   this._updateValueCallback = null;
 };
@@ -52,12 +56,14 @@ Characteristic.prototype.onSubscribe = function (
   updateValueCallback
 ) {
   console.log("Characteristic - onSubscribe");
+  if(this.onSubscribe) this.onSubscribe();
 
   this._updateValueCallback = updateValueCallback;
 };
 
 Characteristic.prototype.onUnsubscribe = function () {
   console.log("Characteristic - onUnsubscribe");
+  if(this.onSubscribe) this.onUnsubscribe();
 
   this._updateValueCallback = null;
 };
