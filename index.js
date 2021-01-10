@@ -109,6 +109,7 @@ const connectToPeripherals = () => {
 
                       //filter vehicle speed, steering angle, and wheel speeds
                       //send on
+                      const id = dataView.getUint32(8);
                       if ([0x309, 0x156, 0x158, 0x1d0].includes(id)) {
                         if (characteristic._updateValueCallback) {
                           characteristic._updateValueCallback(dataArray);
@@ -142,8 +143,7 @@ var EchoCharacteristic = require("./characteristic");
 
 var characteristic = new EchoCharacteristic();
 
-console.log("bleno - echo");
-
+console.log("Starting nst-serialport-ble");
 characteristic.onSubscribe = () => {
   console.log("onSubscribe");
   connectToPeripherals();
