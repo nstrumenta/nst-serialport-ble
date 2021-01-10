@@ -91,35 +91,33 @@ const connectToPeripherals = () => {
           serialPort.on("data", function (data) {
             switch (serialDevice.name) {
               case "canlogger":
-                if (message.id == "canlogger") {
-                  try {
-                    const dataArray = new Uint8Array(data);
-                    const dataView = new DataView(dataArray.buffer);
-                    if (dataView.getUint8(0) == 0x7e) {
-                      //start bit
-                      if (dataView.getUint8(1) == 0x01) {
-                        // Received CAN-bus message
-                        // Description: The application data contain a CAN-bus message received by the logger. Format:
-                        // ID 1
-                        // Time 4 byte
-                        // Time ms 2 byte
-                        // Message ID 4 byte
-                        // Data length 1 byte
-                        // Data 0-8 byte
-                        // The Time field is encoded as ”Epoch” seconds. The message ID is extended if bit 29 (indexed from zero) is set. Multi-byte fields shall be interpreted MSB (Most-Significant- Byte) first.
+                try {
+                  const dataArray = new Uint8Array(data);
+                  const dataView = new DataView(dataArray.buffer);
+                  if (dataView.getUint8(0) == 0x7e) {
+                    //start bit
+                    if (dataView.getUint8(1) == 0x01) {
+                      // Received CAN-bus message
+                      // Description: The application data contain a CAN-bus message received by the logger. Format:
+                      // ID 1
+                      // Time 4 byte
+                      // Time ms 2 byte
+                      // Message ID 4 byte
+                      // Data length 1 byte
+                      // Data 0-8 byte
+                      // The Time field is encoded as ”Epoch” seconds. The message ID is extended if bit 29 (indexed from zero) is set. Multi-byte fields shall be interpreted MSB (Most-Significant- Byte) first.
 
-                        //filter vehicle speed, steering angle, and wheel speeds
-                        //send on
-                        if ([0x309, 0x156, 0x158, 0x1d0].includes(id)) {
-                          if (characteristic._updateValueCallback) {
-                            characteristic._updateValueCallback(dataArray);
-                          }
+                      //filter vehicle speed, steering angle, and wheel speeds
+                      //send on
+                      if ([0x309, 0x156, 0x158, 0x1d0].includes(id)) {
+                        if (characteristic._updateValueCallback) {
+                          characteristic._updateValueCallback(dataArray);
                         }
                       }
                     }
-                  } catch (err) {
-                    console.log(err);
                   }
+                } catch (err) {
+                  console.log(err);
                 }
                 break;
               default:
